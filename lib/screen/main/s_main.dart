@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +16,9 @@ class MainScreen extends StatefulWidget {
 
 class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
   TabItem _currentTab = TabItem.home;
-  final tabs = [TabItem.home, TabItem.favorite];
-  final List<GlobalKey<NavigatorState>> navigatorKeys = [];
+  final tabs = TabItem.values;
+
+  final List<GlobalKey<NavigatorState>> navigatorKeys = TabItem.values.map((e) => GlobalKey<NavigatorState>()).toList();
 
   int get _currentIndex => tabs.indexOf(_currentTab);
 
@@ -28,7 +31,6 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
   @override
   void initState() {
     super.initState();
-    initNavigatorKeys();
   }
 
   @override
@@ -52,8 +54,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
     );
   }
 
-  bool get isRootPage =>
-      _currentTab == TabItem.home && _currentTabNavigationKey.currentState?.canPop() == false;
+  bool get isRootPage => _currentTab == TabItem.home && _currentTabNavigationKey.currentState?.canPop() == false;
 
   IndexedStack get pages => IndexedStack(
       index: _currentIndex,
@@ -123,8 +124,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
     });
   }
 
-  BottomNavigationBarItem bottomItem(
-      bool activate, IconData iconData, IconData inActivateIconData, String label) {
+  BottomNavigationBarItem bottomItem(bool activate, IconData iconData, IconData inActivateIconData, String label) {
     return BottomNavigationBarItem(
         icon: Icon(
           key: ValueKey(label),
@@ -150,12 +150,6 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
       while (navigationKey.currentState?.canPop() == true) {
         navigationKey.currentState!.pop();
       }
-    }
-  }
-
-  void initNavigatorKeys() {
-    for (final _ in tabs) {
-      navigatorKeys.add(GlobalKey<NavigatorState>());
     }
   }
 }
