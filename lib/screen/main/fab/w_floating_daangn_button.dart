@@ -3,10 +3,13 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/animated_width_collapse.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.riverpod.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
+import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FloatingDaangnButton extends ConsumerWidget {
+  static const height = 130.0;
+
   FloatingDaangnButton({super.key});
 
   final duration = 300.ms;
@@ -56,7 +59,7 @@ class FloatingDaangnButton extends ConsumerWidget {
               ),
               Tap(
                 onTap: () {
-                  ref.read(floatingButtonStateProvider.notifier).onTapButton();
+                  ref.read(floatingButtonStateProvider.notifier).toggleMenu();
                 },
                 child: AnimatedContainer(
                   duration: duration,
@@ -81,10 +84,10 @@ class FloatingDaangnButton extends ConsumerWidget {
                       ),
                     ],
                   ),
-                ).pOnly(
-                  bottom: MainScreenState.bottomNavigationBarHeight + context.viewPaddingBottom + 10,
-                  right: 20,
                 ),
+              ).pOnly(
+                bottom: MainScreenState.bottomNavigationBarHeight + context.viewPaddingBottom + 10,
+                right: 20,
               ),
             ],
           ),
