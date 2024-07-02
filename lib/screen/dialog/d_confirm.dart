@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nav/dialog/dialog.dart';
 
 import '../../common/common.dart';
+import '../../common/widget/w_vertical_line.dart';
 
 class ConfirmDialog extends DialogWidget<SimpleResult> {
   final String? message;

@@ -7,6 +7,8 @@ import 'package:fast_app_base/screen/notification/s_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../common/widget/w_vertical_line.dart';
+
 class HomeFragment extends ConsumerStatefulWidget {
   const HomeFragment({super.key});
 

@@ -14,11 +14,8 @@ class NotificationFragment extends HookConsumerWidget {
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : Container(
-            color: Colors.red,
-            child: ListView(
-              children: list.map((e) => NotificationItemWidget(onTap: () {}, notification: e)).toList(),
-            ),
+        : ListView(
+            children: list.map((e) => NotificationItemWidget(onTap: () {}, notification: e)).toList(),
           );
   }
 }

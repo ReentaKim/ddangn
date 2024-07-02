@@ -11,6 +11,7 @@ import '../../common/common.dart';
 import '../../common/language/language.dart';
 import '../../common/theme/theme_util.dart';
 import '../../common/widget/w_mode_switch.dart';
+import '../../common/widget/w_vertical_line.dart';
 
 class MenuDrawer extends StatefulWidget {
   static const minHeightForScrollView = 380;

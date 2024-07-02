@@ -59,7 +59,7 @@ class _NotificationItemWidgetState extends ConsumerState<NotificationItemWidget>
             ),
             height10,
             widget.notification.description.text
-                .color(context.appColors.lessImportantColor)
+                .color(context.appColors.lessImportant)
                 .make()
                 .pOnly(left: leftPadding + iconWidth),
             height10,
@@ -67,7 +67,7 @@ class _NotificationItemWidgetState extends ConsumerState<NotificationItemWidget>
                 .format(widget.notification.time, locale: context.locale.languageCode)
                 .text
                 .size(13)
-                .color(context.appColors.lessImportantColor)
+                .color(context.appColors.lessImportant)
                 .make()
                 .pOnly(left: leftPadding + iconWidth)
           ],
