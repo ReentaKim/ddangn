@@ -2,6 +2,7 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.riverpod.dart';
+import 'package:fast_app_base/screen/main/tab/home/provider/post_provider.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_product_post_item.dart';
 import 'package:fast_app_base/screen/notification/s_notification.dart';
 import 'package:flutter/material.dart';
@@ -36,45 +37,48 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AppBar(
-          centerTitle: false,
-          title: PopupMenuButton<String>(
-            onSelected: (value) {
-              setState(() {
-                title = value;
-              });
-            },
-            itemBuilder: (BuildContext context) => ['다트동', '앱']
-                .map((e) => PopupMenuItem(
-                      value: e,
-                      child: Text(e),
-                    ))
-                .toList(),
-            child: Text(title),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Nav.push(NotificationScreen());
+    final postList = ref.watch(postProvider);
+    return Material(
+      child: Column(
+        children: [
+          AppBar(
+            centerTitle: false,
+            title: PopupMenuButton<String>(
+              onSelected: (value) {
+                setState(() {
+                  title = value;
+                });
               },
-              icon: Icon(
-                Icons.notifications_none_rounded,
-              ),
-            )
-          ],
-        ),
-        Expanded(
-          child: ListView.separated(
-            padding: const EdgeInsets.only(bottom: FloatingDaangnButton.height),
-            controller: scrollController,
-            itemBuilder: (context, index) => ProductPostItem(postList[index]),
-            itemCount: postList.length,
-            separatorBuilder: (context, index) => const Line().pSymmetric(h: 15),
+              itemBuilder: (BuildContext context) => ['다트동', '앱']
+                  .map((e) => PopupMenuItem(
+                        value: e,
+                        child: Text(e),
+                      ))
+                  .toList(),
+              child: Text(title),
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Nav.push(NotificationScreen());
+                },
+                icon: Icon(
+                  Icons.notifications_none_rounded,
+                ),
+              )
+            ],
           ),
-        ),
-      ],
+          Expanded(
+            child: ListView.separated(
+              padding: const EdgeInsets.only(bottom: FloatingDaangnButton.height),
+              controller: scrollController,
+              itemBuilder: (context, index) => ProductPostItem(postList[index]),
+              itemCount: postList.length,
+              separatorBuilder: (context, index) => const Line().pSymmetric(h: 15),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
