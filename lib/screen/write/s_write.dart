@@ -10,6 +10,7 @@ import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../common/entity/dummies.dart';
 import '../../common/entity/post/vo_simple_product_post.dart';
@@ -18,6 +19,7 @@ import '../../common/entity/product/vo_product.dart';
 import '../../common/entity/user/vo_address.dart';
 import '../../common/widget/widget_constant.dart';
 import '../main/tab/home/provider/post_provider.dart';
+import 'd_select_image_source.dart';
 
 class WriteScreen extends ConsumerStatefulWidget {
   const WriteScreen({super.key});
@@ -27,7 +29,7 @@ class WriteScreen extends ConsumerStatefulWidget {
 }
 
 class _WriteScreenState extends ConsumerState<WriteScreen> with KeyboardDetector {
-  final List<String> imageList = [picSum(442)];
+  final List<String> imageList = [];
 
   final titleController = TextEditingController();
   final priceController = TextEditingController();
@@ -58,9 +60,7 @@ class _WriteScreenState extends ConsumerState<WriteScreen> with KeyboardDetector
       ),
       body: Tap(
         onTap: () {
-          // AppKeyboardUtil.hide(context);
-          FocusScope.of(context).unfocus();
-          FocusScope.of(context).requestFocus(FocusNode());
+          AppKeyboardUtil.hide(context);
         },
         child: SingleChildScrollView(
           padding: const EdgeInsets.only(bottom: 150),
@@ -75,30 +75,28 @@ class _WriteScreenState extends ConsumerState<WriteScreen> with KeyboardDetector
                   });
                 },
                 onTap: () async {
-                  // final selectedSource = await SelectImageSourceDialog().show();
-                  //
-                  // if (selectedSource == null) {
-                  //   return;
-                  // }
-                  // try {
-                  //   final file = await ImagePicker().pickImage(source: selectedSource);
-                  //   if (file == null) {
-                  //     return;
-                  //   }
-                  //   setState(() {
-                  //     imageList.add(file.path);
-                  //   });
-                  // } on PlatformException catch(e){
-                  //   switch(e.code){
-                  //     case 'invalid_image':
-                  //       MessageDialog('지원하지 않는 이미지 형식입니다.').show();
-                  //   }
-                  // }
-                  //
-                  // catch (e) {
-                  //   //사진 권한이 필요해요 -> 앱 설정으로
-                  //   print(e);
-                  // }
+                  final selectedSource = await SelectImageSourceDialog().show();
+
+                  if (selectedSource == null) {
+                    return;
+                  }
+                  try {
+                    final file = await ImagePicker().pickImage(source: selectedSource);
+                    if (file == null) {
+                      return;
+                    }
+                    setState(() {
+                      imageList.add(file.path);
+                    });
+                  } on PlatformException catch (e) {
+                    switch (e.code) {
+                      case 'invalid_image':
+                        MessageDialog('지원하지 않는 이미지 형식입니다.').show();
+                    }
+                  } catch (e) {
+                    //사진 권한이 필요해요 -> 앱 설정으로
+                    print(e);
+                  }
                 },
               ),
               _TitleEditor(titleController),
