@@ -5,6 +5,7 @@ import 'package:fast_app_base/screen/dialog/d_color_bottom.dart';
 import 'package:fast_app_base/screen/dialog/d_message.dart';
 import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ProductPostItem extends StatelessWidget {
@@ -16,14 +17,15 @@ class ProductPostItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tap(
       onTap: () {
-        Nav.push(
-          PostDetailScreen(
-            post.id,
-            simpleProductPost: post,
-          ),
-          // context: context,
-          durationMs: 800,
-        );
+        context.go('/main/localLife/${post.id}', extra: post);
+        // Nav.push(
+        //   PostDetailScreen(
+        //     post.id,
+        //     simpleProductPost: post,
+        //   ),
+        //   // context: context,
+        //   durationMs: 800,
+        // );
         // MessageDialog('안녕하세요!').show();
         // MessageDialog('안녕하세요!',context: context,).show(useRootNavigator: false);
         // ColorBottomSheet('안녕').show();
@@ -66,7 +68,7 @@ class ProductPostItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Width(10),
+              const Width(10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
