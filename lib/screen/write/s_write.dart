@@ -141,7 +141,7 @@ class _WriteScreenState extends ConsumerState<WriteScreen> with KeyboardDetector
                       imageList,
                     ),
                     title,
-                    Address('서울시 다트구 플러터동', '플러터동'),
+                    const Address('서울시 다트구 플러터동', '플러터동'),
                     0,
                     0,
                     DateTime.now());
@@ -204,7 +204,7 @@ class _ImageSelectWidget extends StatelessWidget {
                           },
                           child: Transform.rotate(
                             angle: pi / 4,
-                            child: Icon(Icons.add_circle),
+                            child: const Icon(Icons.add_circle),
                           ).pOnly(left: 30, bottom: 30),
                         ),
                       ),
@@ -238,11 +238,11 @@ class SelectImageButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.camera_alt),
+            const Icon(Icons.camera_alt),
             RichText(
                 text: TextSpan(children: [
-              TextSpan(text: imageList.length.toString(), style: TextStyle(color: Colors.orange)),
-              TextSpan(text: '/10')
+              TextSpan(text: imageList.length.toString(), style: const TextStyle(color: Colors.orange)),
+              const TextSpan(text: '/10')
             ])),
           ],
         ).box.rounded.border(color: Colors.grey).make(),
@@ -265,7 +265,7 @@ class _TitleEditor extends StatelessWidget {
         height5,
         TextField(
           controller: controller,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               hintText: '제목',
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -332,7 +332,7 @@ class _PriceEditorState extends State<_PriceEditor> {
           controller: widget.controller,
           keyboardType: TextInputType.number,
           enabled: !isDonateMode,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               hintText: '￦ 가격을 입력해주세요.',
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -363,7 +363,7 @@ class _DescEditor extends StatelessWidget {
         TextField(
           controller: controller,
           maxLines: 7,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               hintText: '에 올릴 게시글 내용을 작성해주세요.',
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(

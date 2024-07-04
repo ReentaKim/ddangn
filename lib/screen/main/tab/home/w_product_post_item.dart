@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/entity/post/vo_simple_product_post.dart';
+import 'package:fast_app_base/screen/dialog/d_color_bottom.dart';
+import 'package:fast_app_base/screen/dialog/d_message.dart';
 import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -14,12 +16,41 @@ class ProductPostItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tap(
       onTap: () {
-        Nav.push(PostDetailScreen(
-          post.id,
-          simpleProductPost: post,
-        ));
-        //상세페이지
+        Nav.push(
+          PostDetailScreen(
+            post.id,
+            simpleProductPost: post,
+          ),
+          context: context,
+          durationMs: 800,
+        );
+        // MessageDialog('안녕하세요!').show();
+        // MessageDialog('안녕하세요!',context: context,).show(useRootNavigator: false);
+        // ColorBottomSheet('안녕').show();
+        // ColorBottomSheet('안녕',context: context,).show();
       },
+        //상세페이지
+      //   return Tap(
+      // onTap: () {
+      //   Nav.push(
+      //     PostDetailScreen(
+      //       post.id,
+      //       simpleProductPost: post,
+      //     ),
+      //     durationMs: 800,
+      //     navAni: NavAni.Top,
+      //   );
+      //   //상세페이지
+      // },
+      // return GestureDetector(
+      //   behavior: HitTestBehavior.translucent,
+      //   onTapUp: (details) {
+      //     Nav.pushWithRippleEffect(
+      //       PostDetailScreen(post.id, simpleProductPost: post),
+      //       offset: Offset(details.globalPosition.dx, details.globalPosition.dy),
+      //       durationMs: 800,
+      //     );
+      //   },
       child: Stack(
         children: [
           Row(
