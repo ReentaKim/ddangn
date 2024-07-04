@@ -67,21 +67,25 @@ class _PostDetail extends HookWidget {
               children: [
                 _ImagePager(pageController: pageController, simpleProductPost: simpleProductPost),
                 UserProfileWidget(simpleProductPost.product.user, address: simpleProductPost.address),
-                Tap(
-                  onTap: () {
-                    Nav.push(
-                      PostDetailScreen(
-                        simpleProductPost.id,
-                        simpleProductPost: simpleProductPost,
-                      ),
-                      context: context,
-                      durationMs: 800,
-                    );
-                  },
-                  child: PostContent(
-                    simpleProductPost: simpleProductPost,
-                    productPost: productPost,
-                  ),
+                // Tap(
+                //   onTap: () {
+                //     Nav.push(
+                //       PostDetailScreen(
+                //         simpleProductPost.id,
+                //         simpleProductPost: simpleProductPost,
+                //       ),
+                //       context: context,
+                //       durationMs: 800,
+                //     );
+                //   },
+                //   child: PostContent(
+                //     simpleProductPost: simpleProductPost,
+                //     productPost: productPost,
+                //   ),
+                // ),
+                PostContent(
+                  simpleProductPost: simpleProductPost,
+                  productPost: productPost,
                 ),
               ],
             ),
@@ -116,9 +120,12 @@ class _ImagePager extends StatelessWidget {
           PageView(
             controller: pageController,
             children: simpleProductPost.product.images
-                .map((url) => CachedNetworkImage(
-                      imageUrl: url,
-                      fit: BoxFit.fill,
+                .map((url) => Hero(
+                      tag: '${simpleProductPost.id}_$url',
+                      child: CachedNetworkImage(
+                        imageUrl: url,
+                        fit: BoxFit.fill,
+                      ),
                     ))
                 .toList(),
           ),
@@ -161,11 +168,11 @@ class _AppBar extends StatelessWidget {
               },
               icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
             ),
-            IconButton(
-              onPressed: () {
-              },
-              icon: const Icon(Icons.home, color: Colors.white),
-            ),
+            // IconButton(
+            //   onPressed: () {
+            //   },
+            //   icon: const Icon(Icons.home, color: Colors.white),
+            // ),
           ],
         ),
         actions: [

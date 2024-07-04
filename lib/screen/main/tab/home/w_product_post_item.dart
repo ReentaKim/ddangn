@@ -21,7 +21,7 @@ class ProductPostItem extends StatelessWidget {
             post.id,
             simpleProductPost: post,
           ),
-          context: context,
+          // context: context,
           durationMs: 800,
         );
         // MessageDialog('안녕하세요!').show();
@@ -29,7 +29,7 @@ class ProductPostItem extends StatelessWidget {
         // ColorBottomSheet('안녕').show();
         // ColorBottomSheet('안녕',context: context,).show();
       },
-        //상세페이지
+      //상세페이지
       //   return Tap(
       // onTap: () {
       //   Nav.push(
@@ -58,9 +58,12 @@ class ProductPostItem extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: CachedNetworkImage(
-                  imageUrl: post.product.images[0],
-                  width: 150,
+                child: Hero(
+                  tag: '${post.id}_${post.product.images[0]}',
+                  child: CachedNetworkImage(
+                    imageUrl: post.product.images[0],
+                    width: 150,
+                  ),
                 ),
               ),
               Width(10),
@@ -68,7 +71,10 @@ class ProductPostItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    post.title.text.size(17).bold.make(),
+                    Hero(
+                      tag: '${post.id}_title',
+                      child: Material(child: post.title.text.size(17).bold.make()),
+                    ),
                     Row(
                       children: [
                         post.address.simpleAddress.text.color(context.appColors.lessImportant).make(),
